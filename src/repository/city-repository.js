@@ -2,6 +2,9 @@ const {City} = require("../models/index");
 
 class CityRepository{
 
+    /* constructor(){
+
+    } */
 
     async createCity({name}){
         try {
@@ -25,8 +28,30 @@ class CityRepository{
         }
     }
 
-    async updateCity(cityId){
+    async updateCity(cityId, data){
+        try {
+            const city = await City.update(data, {
+                where: {
+                    id : cityId,
+                }
+            });
+            return city;
+        } catch (error) {
+            throw {error};
+        }
+    }
 
+    async getCity(cityId){
+        try {
+            const city = await City.findByPk({
+                where : {
+                    id : cityId,
+                }
+            });
+            return city;
+        } catch (error) {
+            throw {error};
+        }
     }
 }
 
