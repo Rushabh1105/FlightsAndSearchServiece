@@ -55,8 +55,18 @@ class CityRepository{
         }
     }
 
-    async getAllCity(){
+    async getAllCity(filter){
         try {
+            if(filter.name){
+                const cities = await City.findAll({
+                    where : {
+                        name : {
+                            [Op.startsWith] : filter.name,
+                        }
+                    }
+                });
+                return cities;
+            }
             const cities = await City.findAll();
             return cities;
         } catch (error) {
