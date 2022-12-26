@@ -32,11 +32,14 @@ class CityRepository{
 
     async updateCity(cityId, data){
         try {
-            const city = await City.update(data, {
+            /* const city = await City.update({name : data.name}, {
                 where: {
                     id : cityId,
                 }
-            });
+            }); */
+            const city = await City.findByPk(cityId);
+            city.name = data.name;
+            await city.save();
             return city;
         } catch (error) {
             throw {error};
@@ -45,14 +48,19 @@ class CityRepository{
 
     async getCity(cityId){
         try {
-            const city = await City.findByPk({
-                where : {
-                    id : cityId,
-                }
-            });
+            const city = await City.findByPk(cityId);
             return city;
         } catch (error) {
             throw {error};
+        }
+    }
+
+    async getAllCity(){
+        try {
+            const cities = await City.findAll();
+            return cities;
+        } catch (error) {
+            throw {error}
         }
     }
 }
