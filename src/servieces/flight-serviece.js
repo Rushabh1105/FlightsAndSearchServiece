@@ -26,6 +26,16 @@ class FlightServiece{
             throw {error};
         }
     }
+
+    async getAllFlight(data){
+        try {
+            const flights = await this.flightRepository.getAllFlight(data);
+            return flights;
+        } catch (error) {
+            console.log("error at flight serviece layer");
+            throw {error};
+        }
+    }
 }
 
 

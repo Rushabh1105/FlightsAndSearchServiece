@@ -22,8 +22,27 @@ const createFlight = async (req, res) => {
     }
 }
 
+const getAllFlight =  async (req, res) => {
+    try {
+        const response = await flightServiece.getAllFlight(req.query);
+        return res.status(201).json({
+            success : true,
+            message : "fetched a flight",
+            data : response,
+            err : {},
+        })
+    } catch (error) {
+        console.log("error at flight controller level");
+        return res.status(500).json({
+            success : false,
+            message : "something went wrong",
+            err : {error},
+        });
+    }
+}
 
 
 module.exports = {
     createFlight,
+    getAllFlight,
 }
