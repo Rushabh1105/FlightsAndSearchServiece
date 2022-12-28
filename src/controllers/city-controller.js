@@ -92,6 +92,7 @@ const getAllCity = async (req, res) => {
         return res.status(500).json({
             success : false,
             message : "something went wrong",
+            err : error,
         });
     }
 }
