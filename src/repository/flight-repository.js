@@ -1,5 +1,5 @@
 
-const {Flight} = require("../models/index");
+const { Flight } = require("../models/index");
 const { Op } = require("sequelize");
 
 class FlightRepository{
@@ -36,8 +36,8 @@ class FlightRepository{
 
     async getFlight(flightId){
         try {
-            const flight = await Flight.findByPK(flightId);
-            return flight
+            const flight = await Flight.findByPk(flightId);
+            return flight;
         } catch (error) {
             console.log("Error at flight repository level");
             throw {error};
@@ -53,6 +53,20 @@ class FlightRepository{
             });
             console.log(flight)
             return flight
+        } catch (error) {
+            console.log("Error at flight repository level");
+            throw {error};
+        }
+    }
+
+    async updateFlight(flightId, data){
+        try {
+            await Flight.update(data, {
+                where : {
+                    id : flightId,
+                }
+            });
+            return true;
         } catch (error) {
             console.log("Error at flight repository level");
             throw {error};
